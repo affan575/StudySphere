@@ -1,0 +1,27 @@
+{% extends "base.html" %}{% block title %}StudySphere | Stay Ahead{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">YOUR PERSONAL ACADEMIC WORKSPACE</span>
+    <h1>Stay Ahead of<br>Every Deadline.</h1>
+    <p>StudySphere helps students organise assignments, track submission dates and monitor academic progress from one simple dashboard.</p>
+    <div class="actions"><a class="btn primary" href="{{ url_for('register') }}">Create account</a><a class="btn secondary" href="{{ url_for('login') }}">Log in</a></div>
+    <p class="micro">Plan coursework <b>·</b> Track deadlines <b>·</b> Stay organised</p>
+  </div>
+  <div class="preview-card">
+    <div class="preview-head"><span>MY ACADEMIC OVERVIEW</span><small>YOUR WORKSPACE</small></div>
+    <div class="stats three">
+      <div class="stat"><strong>12</strong><span>Assignments</span></div><div class="stat purple"><strong>04</strong><span>Due soon</span></div><div class="stat green"><strong>08</strong><span>Submitted</span></div>
+    </div>
+    <h3>RECENT ASSIGNMENTS</h3>
+    <div class="preview-row"><span class="dot"></span><b>MERN stack micro project</b><em>Web Tech</em><label class="tag high">High</label><small>10 Nov</small></div>
+    <div class="preview-row"><span class="dot"></span><b>Prepare DBMS record</b><em>DBMS</em><label class="tag">Medium</label><small>12 Nov</small></div>
+    <div class="preview-row"><span class="dot"></span><b>Python assignment 4</b><em>Python</em><label class="tag done">Low</label><small>15 Nov</small></div>
+  </div>
+</section>
+<section class="feature-grid" id="features">
+  <article><span>01</span><h3>Organise</h3><p>Keep all coursework and assignment details in one place.</p></article>
+  <article><span>02</span><h3>Prioritise</h3><p>Know what is due next and focus on important tasks.</p></article>
+  <article><span>03</span><h3>Progress</h3><p>Track every submission and monitor your academic progress.</p></article>
+</section>
+{% endblock %}

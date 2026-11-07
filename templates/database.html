@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Database | StudySphere{% endblock %}
+{% block content %}
+<div class="page-title"><span class="eyebrow">SYSTEM ARCHITECTURE</span><h1>Database &amp; MERN stack overview</h1><p class="muted">Understand how the StudySphere interface, API and database work together.</p></div>
+<section class="panel architecture">
+  <h2>HOW THE MERN STACK WORKS</h2>
+  <div class="arch-flow"><div><b>REACT.JS</b><small>Frontend interface</small></div><i>→</i><div><b>EXPRESS.JS</b><small>API routes</small></div><i>→</i><div><b>NODE.JS</b><small>Backend server</small></div><i>→</i><div><b>MONGODB</b><small>Database</small></div></div>
+</section>
+<div class="collection-grid">
+  <article class="panel collection"><h2>users collection</h2><p>Stores registered student account details.</p><ul><li><code>_id</code> — unique MongoDB document ID</li><li><code>name</code> — student's full name</li><li><code>email</code> — unique login email</li><li><code>passwordHash</code> — securely hashed password</li><li><code>createdAt</code> — account creation date</li></ul></article>
+  <article class="panel collection"><h2>assignments collection</h2><p>Stores each student's assignment information.</p><ul><li><code>_id</code> — unique assignment ID</li><li><code>title</code> — assignment name</li><li><code>description</code> — task details</li><li><code>course / priority / status</code> — text values</li><li><code>dueDate and userId</code> — date and owner reference</li></ul></article>
+</div>
+<div class="note-strip">MongoDB stores documents · Mongoose defines schemas · Express handles CRUD APIs · React renders the data</div>
+<p class="implementation-note"><b>VS Code demo implementation:</b> This downloadable version uses Python Flask with a local SQLite database so it runs without installing MongoDB or Node.js. The diagram above explains the MERN architecture shown in the project design.</p>
+{% endblock %}

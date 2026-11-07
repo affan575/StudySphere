@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block title %}Assignments | StudySphere{% endblock %}
+{% block content %}
+<div class="page-title"><span class="eyebrow">COURSEWORK MANAGER</span><h1>Manage assignments</h1><p class="muted">Create, review, edit and delete your assignment records.</p></div>
+<div class="crud-layout">
+  <form class="panel form-panel" method="post">
+    <span class="eyebrow">CREATE RECORD</span><h2>Add assignment</h2><p class="muted">Enter details and save your record.</p>
+    <label>Assignment title<input name="title" placeholder="e.g. MERN stack micro project" required></label>
+    <label>Description<textarea name="description" rows="3" placeholder="Short assignment description"></textarea></label>
+    <div class="two-fields"><label>Course<input name="course" placeholder="Web Tech" required></label><label>Due date<input type="date" name="due_date" required></label></div>
+    <div class="two-fields"><label>Priority<select name="priority"><option>High</option><option selected>Medium</option><option>Low</option></select></label><label>Status<select name="status"><option>Pending</option><option>In Progress</option><option>Submitted</option></select></label></div>
+    <button class="btn primary full">Save assignment</button>
+  </form>
+  <section class="panel records-panel"><div class="section-heading"><div><span class="eyebrow">YOUR COURSEWORK</span><h2>Your assignments</h2></div><span class="record-count">{{ assignments|length }} records</span></div>
+    <input class="search-input" id="assignmentSearch" placeholder="Search assignments...">
+    <div class="record-list">
+    {% for a in assignments %}
+      <article class="record" data-search="{{ (a.title ~ ' ' ~ a.course ~ ' ' ~ a.status)|lower }}">
+        <div class="record-main"><div><h3>{{ a.title }}</h3><p>{{ a.course }} · Due {{ a.due_date }} · {{ a.priority }} priority</p><span class="status {{ a.status|lower|replace(' ','-') }}">{{ a.status }}</span></div>
+          <div class="record-actions"><button type="button" class="icon-btn edit-toggle" aria-label="Edit">✎</button><form method="post" action="{{ url_for('delete_assignment', item_id=a.id) }}" onsubmit="return confirm('Delete this assignment?')"><button class="icon-btn delete" aria-label="Delete">×</button></form></div>
+        </div>
+        <form class="edit-form hidden" method="post" action="{{ url_for('edit_assignment', item_id=a.id) }}">
+          <label>Title<input name="title" value="{{ a.title }}" required></label><label>Description<textarea name="description" rows="2">{{ a.description }}</textarea></label>
+          <div class="two-fields"><label>Course<input name="course" value="{{ a.course }}" required></label><label>Due date<input type="date" name="due_date" value="{{ a.due_date }}" required></label></div>
+          <div class="two-fields"><label>Priority<select name="priority">{% for p in ['High','Medium','Low'] %}<option {{ 'selected' if p==a.priority else '' }}>{{ p }}</option>{% endfor %}</select></label><label>Status<select name="status">{% for s in ['Pending','In Progress','Submitted'] %}<option {{ 'selected' if s==a.status else '' }}>{{ s }}</option>{% endfor %}</select></label></div>
+          <button class="btn primary small">Save changes</button>
+        </form>
+      </article>
+    {% else %}<div class="empty">Your assignment list is empty. Use the form to create your first record.</div>{% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

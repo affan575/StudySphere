@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Dashboard | StudySphere{% endblock %}
+{% block content %}
+<div class="dashboard-heading"><div><span class="eyebrow">YOUR WORKSPACE</span><h1>Good afternoon, {{ session.get('name','Student') }}</h1><p class="muted">Here is your academic progress at a glance.</p></div><a class="btn primary" href="{{ url_for('assignments') }}">+ Add assignment</a></div>
+<div class="stats dashboard-stats"><div class="stat"><strong>{{ total }}</strong><span>Total assignments</span></div><div class="stat purple"><strong>{{ due_soon }}</strong><span>Due soon</span></div><div class="stat green"><strong>{{ submitted }}</strong><span>Submitted</span></div><div class="stat amber"><strong>{{ pending }}</strong><span>Pending</span></div></div>
+<div class="progress-block"><div class="progress-label"><b>SUBMISSION PROGRESS</b><span>{{ submitted }} / {{ total }}</span></div><div class="progress-track"><div style="width:{{ (submitted / total * 100) if total else 0 }}%"></div></div></div>
+<div class="section-heading"><h2>Recent assignments</h2><a href="{{ url_for('assignments') }}">Manage all →</a></div>
+<div class="table-card"><table><thead><tr><th>ASSIGNMENT</th><th>COURSE</th><th>PRIORITY</th><th>STATUS</th><th>DUE DATE</th></tr></thead><tbody>
+{% for a in assignments %}<tr><td><b>{{ a.title }}</b><small>{{ a.description }}</small></td><td>{{ a.course }}</td><td><span class="tag">{{ a.priority }}</span></td><td><span class="status {{ a.status|lower|replace(' ','-') }}">{{ a.status }}</span></td><td>{{ a.due_date }}</td></tr>
+{% else %}<tr><td colspan="5" class="empty">No assignments yet. Add your first assignment to get started.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

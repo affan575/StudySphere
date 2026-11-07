@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block title %}{{ 'Create account' if mode=='register' else 'Log in' }} | StudySphere{% endblock %}
+{% block content %}
+<section class="auth-layout">
+  <div class="auth-aside"><span class="eyebrow">STUDYSPHERE</span><h1>Your study space,<br>all in one place.</h1>
+    <p>Sign in to manage assignments, check upcoming deadlines and keep your academic work moving.</p>
+    <div class="aside-points"><div><b>01</b> View your dashboard</div><div><b>02</b> Update assignment status</div><div><b>03</b> Manage coursework</div></div>
+  </div>
+  <form class="auth-form" method="post">
+    <span class="eyebrow">{{ 'GET STARTED' if mode=='register' else 'WELCOME BACK' }}</span>
+    <h2>{{ 'Create your account' if mode=='register' else 'Welcome back' }}</h2>
+    <p class="muted">{{ 'Set up your StudySphere workspace.' if mode=='register' else 'Log in to continue to StudySphere.' }}</p>
+    {% if mode=='register' %}<label>Full name<input name="name" placeholder="Enter your full name" required></label>{% endif %}
+    <label>Email address<input type="email" name="email" placeholder="you@example.com" required></label>
+    <label>Password<input type="password" name="password" placeholder="At least 6 characters" minlength="6" required></label>
+    <button class="btn primary full" type="submit">{{ 'Create account' if mode=='register' else 'Log in securely' }}</button>
+    <p class="switch-auth">{% if mode=='register' %}Already registered? <a href="{{ url_for('login') }}">Log in</a>{% else %}New to StudySphere? <a href="{{ url_for('register') }}">Create an account</a>{% endif %}</p>
+  </form>
+</section>
+{% endblock %}
